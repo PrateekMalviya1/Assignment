@@ -9,7 +9,7 @@ export default function page() {
   let [data, setData] = useState([]);
 
   let getData = () => {
-    axios.get('/Api/ShowSchool')
+    axios.get('/schoolapi/ShowSchool')
       .then((res) => { setData(res.data.result) })
       .catch((err) => { console.log(err) })
   }
