@@ -23,7 +23,7 @@ export default function Home() {
       formData.append('image', data.Image[0]);
     }
 
-    axios.post('/Api/AddSchool', formData)
+    axios.post('/api/addschool', formData)
     .then((res)=>{ console.log(res.data) })
     .then(()=>{
       reset()
