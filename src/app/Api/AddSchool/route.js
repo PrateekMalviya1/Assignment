@@ -1,8 +1,6 @@
 import { connectDb } from "@/DatabaseConnection";
 import { createTable } from "@/Models/table";
 import { writeFileSync } from "fs";
-// import { writeFileSync } from "fs";
-import { writeFile } from 'fs/promises'
 import { NextResponse } from "next/server";
 import path from "path";
 

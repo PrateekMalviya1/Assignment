@@ -7,8 +7,7 @@ export const connectDb = async () => {
             host: process.env.MYSQLHOST,
             user: process.env.MYSQLUSER,
             password: process.env.MYSQLPASSWORD,
-            database: process.env.MYSQLDATABASE,
-            port: '3306'
+            database: process.env.MYSQLDATABASE
         })
     }
     return connection;
