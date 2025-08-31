@@ -47,6 +47,7 @@ export default function Home() {
             
             <input type="file" 
             {...register("Image", { required: false })} 
+            accept="image/*"
             className='border py-1 rounded-sm file:bg-[#bcb6b1] dark:file:bg-[#332f2c] file:rounded-e-full file:px-[8px] file:mr-2' />
 
             <input type="text" 
