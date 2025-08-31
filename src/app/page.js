@@ -1,103 +1,94 @@
-import Image from "next/image";
+'use client'
+import axios from 'axios';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import Header from './Pages/Components/Header';
+
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { register, handleSubmit, reset } = useForm();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+
+  let form = (data) => {
+    let formData = new FormData()
+    formData.append('name', data.Name);
+    formData.append('address', data.Address);
+    formData.append('city', data.City);
+    formData.append('state', data.State);
+    formData.append('contact', data.Contact);
+    formData.append('email', data.Email);
+    if (data.Image && data.Image[0]) {
+      formData.append('image', data.Image[0]);
+    }
+
+    axios.post('/Api/AddSchool', formData)
+    .then((res)=>{ console.log(res.data) })
+    .then(()=>{
+      reset()
+    })
+  }
+
+
+
+  return (
+    <div >
+      <div
+        className='relative h-screen w-full text-center bg-[url(/FormBackgroundImage.webp)] dark:bg-[url(/FormBackgroundDark.webp)] bg-cover  text-[#1c1917] dark:text-[#f5f5f4] bg-center'>
+          <header className='shadow shadow-neutral-300 dark:shadow-neutral-700 drop-shadow-xl mb-2 bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.5)]'>
+            <Header />
+          </header>
+        {/* Form Div */}
+        <div className='border rounded-2xl py-[20px] absolute top-[50%] left-[50%] translate-[-50%] w-[85%] sm:w-[70%] md:w-[60%] lg-[50%] p-[12px] bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.5)]'>
+          <h2 className='py-[20px] text-[32px]'> Add School </h2>
+
+          <form onSubmit={handleSubmit(form)} className='flex flex-col gap-2 px-2'>
+            
+            <input type="file" 
+            {...register("Image", { required: false })} 
+            className='border py-1 rounded-sm file:bg-[#bcb6b1] dark:file:bg-[#332f2c] file:rounded-e-full file:px-[8px] file:mr-2' />
+
+            <input type="text" 
+            {...register("Name", { required: false })} 
+            className='border py-1 rounded-sm placeholder:ps-[8px]' 
+            placeholder='Name' />
+
+            <input type="text" 
+            {...register("Address", { required: false })} 
+            className='border py-1 rounded-sm placeholder:ps-[8px]' 
+            placeholder='Address' />
+
+            <input type="text" 
+            {...register("City", { required: false })} 
+            className='border py-1 rounded-sm placeholder:ps-[8px]'
+             placeholder='City' />
+
+            <input type="text" 
+            {...register("State", { required: false })} 
+            className='border py-1 rounded-sm placeholder:ps-[8px]' 
+            placeholder='State' />
+
+            <input type="text" 
+            {...register("Contact", { required: true, pattern: /^[0-9+ ]{10,}$/i })} 
+            className='border py-1 rounded-sm placeholder:ps-[8px]' 
+            placeholder='Contact' />
+
+            <input type="email" 
+            {...register("Email", { required: false, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} className='border py-1 rounded-sm placeholder:ps-[8px]' 
+            placeholder='Email' />
+
+            <div>
+              <button className='border p-[4px_8px] rounded-sm'> Submit </button>
+            </div>
+          </form>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+
+
+      </div>
+
     </div>
-  );
+  )
 }
+
