@@ -8,10 +8,22 @@ import Header from './Pages/Components/Header';
 
 export default function Home() {
   const { register, handleSubmit, reset } = useForm();
+  let [btnStatus, setBtnStatus] = useState('')
 
+  let handleBtnStatus = () => {
+    setBtnStatus('...Enter Proper Data')
+  }
 
+  let timeOutFunction = () => {
+    setTimeout(() => {
+      setBtnStatus('')
+    }, 1000);
+  }
 
   let form = (data) => {
+    console.log('Enter In Function')
+    setBtnStatus('...Wait')
+
     let formData = new FormData()
     formData.append('name', data.Name);
     formData.append('address', data.Address);
@@ -26,7 +38,13 @@ export default function Home() {
     axios.post('/schoolapi/addschool', formData)
       .then((res) => { console.log(res.data) })
       .then(() => {
-        reset()
+        reset();
+        setBtnStatus('...Complete');
+        timeOutFunction();
+      })
+      .catch(()=>{
+        setBtnStatus('...Wrong Data');
+        timeOutFunction()
       })
   }
 
@@ -81,7 +99,12 @@ export default function Home() {
               placeholder='Email' />
 
             <div>
-              <button className='p-[4px_8px] rounded-sm bg-[rgb(51,145,203)] text-white hover:bg-[#2b76a5] hover:shadow hover:shadow-[#2b76a5]'> Submit </button>
+              <button
+                className={`p-[4px_8px] rounded-sm bg-[rgb(51,145,203)] text-white hover:bg-[#2b76a5] hover:shadow-2xl hover:shadow-[#2b76a5] 
+                  ${(btnStatus == '...Wait')?'bg-sky-400':( btnStatus == '...Complete' ) ?'bg-green-400': (btnStatus == '...Wrong Data') ? 'bg-red-500' : 'bg-[rgb(51,145,203)]'}`}
+                onClick={handleBtnStatus}>
+                Submit {btnStatus}
+              </button>
             </div>
           </form>
         </div>
