@@ -15,7 +15,6 @@ export async function createTable() {
 
         let dbConnection = await connectDb();
         let res = await dbConnection.query(SQLquery);
-        console.log("result in Model : ", res)
     } catch (error) {
         console.log(error);
 

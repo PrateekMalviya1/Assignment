@@ -24,60 +24,61 @@ export default function Home() {
     }
 
     axios.post('/schoolapi/addschool', formData)
-    .then((res)=>{ console.log(res.data) })
-    .then(()=>{
-      reset()
-    })
+      .then((res) => { console.log(res.data) })
+      .then(() => {
+        reset()
+      })
   }
 
 
 
   return (
     <div >
+      <header className='shadow shadow-neutral-300 dark:shadow-neutral-700 drop-shadow-xl mb-2 bg-neutral-100 dark:bg-neutral-800'>
+        <Header />
+      </header>
       <div
-        className='relative h-screen w-full text-center bg-[url(/FormBackgroundImage.webp)] dark:bg-[url(/FormBackgroundDark.webp)] bg-cover  text-[#1c1917] dark:text-[#f5f5f4] bg-center'>
-          <header className='shadow shadow-neutral-300 dark:shadow-neutral-700 drop-shadow-xl mb-2 bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.5)]'>
-            <Header />
-          </header>
+        className='fixed top-0 left-0 -z-50 h-screen w-full text-center bg-[url(/FormBackgroundImage.webp)] dark:bg-[url(/UpdatedBG.webp)] bg-cover  text-[#1c1917] dark:text-[#f5f5f4] bg-center'>
+
         {/* Form Div */}
-        <div className='border rounded-2xl py-[20px] absolute top-[50%] left-[50%] translate-[-50%] w-[85%] sm:w-[70%] md:w-[60%] lg-[50%] p-[12px] bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.5)]'>
+        <div className='border rounded-2xl py-[20px] absolute -z-40 top-[50%] left-[50%] translate-[-50%] w-[85%] sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[40%] p-[12px] bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.5)]'>
           <h2 className='py-[20px] text-[32px]'> Add School </h2>
 
           <form onSubmit={handleSubmit(form)} className='flex flex-col gap-2 px-2'>
-            
-            <input type="file" 
-            {...register("Image", { required: false })} 
-            accept="image/*"
-            className='border py-1 rounded-sm file:bg-[#bcb6b1] dark:file:bg-[#332f2c] file:rounded-e-full file:px-[8px] file:mr-2' />
 
-            <input type="text" 
-            {...register("Name", { required: false })} 
-            className='border py-1 rounded-sm placeholder:ps-[8px]' 
-            placeholder='Name' />
+            <input type="file"
+              {...register("Image", { required: false })}
+              accept="image/*"
+              className='border py-1 rounded-sm file:bg-[#bcb6b1] dark:file:bg-[#332f2c] file:rounded-e-full file:px-[8px] file:mr-2' />
 
-            <input type="text" 
-            {...register("Address", { required: false })} 
-            className='border py-1 rounded-sm placeholder:ps-[8px]' 
-            placeholder='Address' />
+            <input type="text"
+              {...register("Name", { required: false })}
+              className='border py-1 rounded-sm placeholder:ps-[8px]'
+              placeholder='Name' />
 
-            <input type="text" 
-            {...register("City", { required: false })} 
-            className='border py-1 rounded-sm placeholder:ps-[8px]'
-             placeholder='City' />
+            <input type="text"
+              {...register("Address", { required: false })}
+              className='border py-1 rounded-sm placeholder:ps-[8px]'
+              placeholder='Address' />
 
-            <input type="text" 
-            {...register("State", { required: false })} 
-            className='border py-1 rounded-sm placeholder:ps-[8px]' 
-            placeholder='State' />
+            <input type="text"
+              {...register("City", { required: false })}
+              className='border py-1 rounded-sm placeholder:ps-[8px]'
+              placeholder='City' />
 
-            <input type="text" 
-            {...register("Contact", { required: true, pattern: /^[0-9+ ]{10,}$/i })} 
-            className='border py-1 rounded-sm placeholder:ps-[8px]' 
-            placeholder='Contact' />
+            <input type="text"
+              {...register("State", { required: false })}
+              className='border py-1 rounded-sm placeholder:ps-[8px]'
+              placeholder='State' />
 
-            <input type="email" 
-            {...register("Email", { required: false, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} className='border py-1 rounded-sm placeholder:ps-[8px]' 
-            placeholder='Email' />
+            <input type="text"
+              {...register("Contact", { required: true, pattern: /^[0-9+ ]{10,}$/i })}
+              className='border py-1 rounded-sm placeholder:ps-[8px]'
+              placeholder='Contact' />
+
+            <input type="email"
+              {...register("Email", { required: false, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} className='border py-1 rounded-sm placeholder:ps-[8px]'
+              placeholder='Email' />
 
             <div>
               <button className='border p-[4px_8px] rounded-sm'> Submit </button>

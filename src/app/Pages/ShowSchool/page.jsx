@@ -22,7 +22,7 @@ export default function page() {
         <Header />
       </header>
       <div className='max-w-[1320px] mx-auto px-[20px]'>
-        <h2 className='text-center text-[30px] my-[20px] font-medium'> List of School </h2>
+        <h2 className='text-center text-[30px] my-[20px] font-medium'> School Records </h2>
         <div className='grid gap-3 py-1 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
           {
             (data.length > 0) ?
