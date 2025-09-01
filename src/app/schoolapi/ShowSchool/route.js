@@ -7,6 +7,8 @@ export async function GET (request) {
     try {
         const db = await connectDb();
         let [result] = await db.execute("SELECT * FROM schoolTable");
+        await db.end();
+
         return NextResponse.json({'Status': 'True', 'Message': 'Date is Fetching', result }, {status:200})
     } catch (error) {
         console.log(error)

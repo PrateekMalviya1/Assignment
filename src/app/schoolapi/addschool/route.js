@@ -1,11 +1,20 @@
 import { connectDb } from "@/DatabaseConnection";
 import { createTable } from "@/Models/table";
+// import { v2 } from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 import { writeFileSync } from "fs";
 import { NextResponse } from "next/server";
 import path from "path";
 
 export async function POST(request) {
     try {
+        cloudinary.config({
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+            api_key: process.env.CLOUDINARY_API_KEY,
+            api_secret: process.env.CLOUDINARY_API_SECRET,
+        });
+
+
         let db = await connectDb();
         await createTable();
 
@@ -22,14 +31,17 @@ export async function POST(request) {
             return NextResponse.json({ "Status": "False", "Message": "Image Not Found" }, { status: 404 })
         }
 
-        const ImageName = `/Images/${Date.now()}+${file.name}`
+
         const byteData = await file.arrayBuffer();
         const buffer = Buffer.from(byteData);
 
-        const filepath = path.join("public",ImageName)
-        writeFileSync(filepath, buffer);
+        const fileBase64 = `data:${file.type};base64,${buffer.toString("base64")}`;
+        const uploadCloudRes = await cloudinary.uploader.upload(fileBase64, { folder: "schoolImages" })
 
-        let res = await db.execute("INSERT INTO schoolTable (name, address, city, state, contact, image, email_id ) VALUES (?, ?, ?, ?, ?, ?, ?)", [name, address, city, state, contact, ImageName, email])
+
+        let res = await db.execute("INSERT INTO schoolTable (name, address, city, state, contact, image, email_id ) VALUES (?, ?, ?, ?, ?, ?, ?)", [name, address, city, state, contact, uploadCloudRes.secure_url, email])
+        
+        await db.end()
 
         return NextResponse.json({ "Status": "True", "Message": 'Data Is Inserted', "result": res }, { status: 200 })
     } catch (error) {
