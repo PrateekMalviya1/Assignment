@@ -40,8 +40,7 @@ export async function POST(request) {
 
 
         let res = await db.execute("INSERT INTO schoolTable (name, address, city, state, contact, image, email_id ) VALUES (?, ?, ?, ?, ?, ?, ?)", [name, address, city, state, contact, uploadCloudRes.secure_url, email])
-        
-        await db.end()
+
 
         return NextResponse.json({ "Status": "True", "Message": 'Data Is Inserted', "result": res }, { status: 200 })
     } catch (error) {
