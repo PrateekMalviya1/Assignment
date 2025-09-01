@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <div >
-      <header className='shadow shadow-neutral-300 dark:shadow-neutral-700 drop-shadow-xl mb-2 bg-neutral-100 dark:bg-neutral-800'>
+      <header className='shadow shadow-neutral-300 dark:shadow-neutral-700 opacity-95 drop-shadow-xl mb-2 bg-neutral-100 dark:bg-[#181818]'>
         <Header />
       </header>
       <div
