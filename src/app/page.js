@@ -100,7 +100,7 @@ export default function Home() {
 
             <div>
               <button
-                className={`p-[4px_8px] rounded-sm bg-[rgb(51,145,203)] text-white hover:bg-[#2b76a5] hover:shadow-2xl hover:shadow-[#2b76a5] ${(btnStatus == '...Wait')?'bg-sky-400':( btnStatus == '...Complete' ) ?'bg-green-400': (btnStatus == '...Wrong Data') ? 'bg-red-500' : 'bg-[rgb(51,145,203)]'}`}
+                className={`p-[4px_8px] rounded-sm text-white hover:bg-[#2b76a5] hover:shadow-2xl hover:shadow-[#2b76a5] ${(btnStatus == '...Wait')?'bg-sky-400 dark:bg-neutral-600':( btnStatus == '...Complete' ) ?'bg-green-400 dark:bg-neutral-600': (btnStatus == '...Wrong Data') ? 'bg-red-500 dark:bg-neutral-600' : 'bg-[rgb(51,145,203)] dark:bg-neutral-600'}`}
                 onClick={handleBtnStatus}>
                 Submit {btnStatus}
               </button>
