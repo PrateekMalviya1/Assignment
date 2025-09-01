@@ -81,7 +81,7 @@ export default function Home() {
               placeholder='Email' />
 
             <div>
-              <button className='border p-[4px_8px] rounded-sm'> Submit </button>
+              <button className='p-[4px_8px] rounded-sm bg-[rgb(51,145,203)] text-white hover:bg-[#2b76a5] hover:shadow hover:shadow-[#2b76a5]'> Submit </button>
             </div>
           </form>
         </div>

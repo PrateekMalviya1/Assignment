@@ -8,9 +8,9 @@ export default function Card({ name, imageName, address, city }) {
                 <div>
                     <img src={`${imageName}`} alt="../ Image Not Found" className='w-[100%] h-[200px] rounded-t-md' />
                 </div>
-                <div className='flex flex-col my-[8px]'>
+                <div className='flex flex-col px-2 my-[8px]'>
                     <div className='text-[14px] ps-2'> {city} </div>
-                    <h2 className='text-center py-[8px] text-[20px] shadow-neutral-300 dark:shadow-neutral-700 font-medium'> {name} </h2>
+                    <h2 className='py-[8px] text-[20px] shadow-neutral-300 dark:shadow-neutral-700 font-medium'> {name} </h2>
                     <div className=' text-[14px] ps-2 shadow-neutral-300 dark:shadow-neutral-700 '> {address} </div>
                 </div>
             </div>
