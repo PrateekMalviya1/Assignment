@@ -17,14 +17,14 @@ export default function page() {
     getData()
   }, [])
   return (
-    <div>
-      <header className='shadow shadow-neutral-300 dark:shadow-neutral-700 drop-shadow-xl mb-2'>
+    <div className='bg-neutral-100 dark:bg-neutral-800'>
+      <header className='shadow shadow-neutral-300 dark:shadow-neutral-700 drop-shadow-xl mb-2 bg-neutral-100 dark:bg-neutral-800'>
         <Header />
       </header>
       <div className='dark:bg-neutral-800 dark:text-neutral-100 bg-neutral-100 text-neutral-800 min-h-[100vh]'>
 
 
-        <div className='max-w-[1320px] mx-auto px-[20px]'>
+        <div className='max-w-[1320px] mx-auto px-[20px] bg-neutral-100 dark:bg-neutral-800'>
           <h2 className='text-center text-[30px] my-[20px] font-medium'> School Records </h2>
 
           <div className='grid gap-3 py-1 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
