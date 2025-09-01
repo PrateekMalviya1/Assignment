@@ -38,7 +38,7 @@ export default function Header() {
 
       {/* Canvas div */}
       <div className={`dark:bg-neutral-800 bg-neutral-700 dark:text-neutral-100 fixed top-0 left-0 z-20 w-screen text-neutral-800 h-screen ${(offCanvas) ? 'block overflow-hidden ' : 'hidden overflow-hidden'}`}>
-        <div className='bg-neutral-200 dark:bg-neutral-700  h-full  border'>
+        <div className='bg-neutral-200 dark:bg-neutral-700 absolute top-0 left-0 w-full  h-screen  border'>
           <div className='flex justify-end pr-[20px] pt-[20px] text-[24px] w-full'>
             <IoCloseOutline onClick={()=>{setOffCanvas(!offCanvas)}} />
           </div>
